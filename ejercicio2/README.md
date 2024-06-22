@@ -33,3 +33,7 @@ Adicionalmente, se cuenta con la clase `Restaurant` que se encuentra completa y 
 La implementación solicitada debe integrarse adecuadamente con la clase `Restaurant` para que la página de **reservas** funcione correctamente.
 
 No se admiten cambios en la clase `Restaurant`.
+
+
+# Desarrollo Ejercicio N 2
+Impletamos dentro de la clase reservation haciendo toda la propiedad que pide tambien resolvimos la clase customer con sus respectiva propiedades. 
