@@ -39,3 +39,6 @@ Para completar la implementación, se solicita realizar las siguientes tareas:
     - El método debe ser **asíncrono**, puede utilizar `fetch` o `XMLHttpRequest`. Pueden emplear `async/await` o promesas.
     - El método debe recibir la ruta del archivo `sensors.json` como argumento.
     - El método no debe retornar nada, pero debe invocar al método `render` para mostrar los sensores en la página.
+
+    # Desarrollo del ejercicio n 1
+    Implementamos las propiedades para la clase sensores y la clase SensorManager.
