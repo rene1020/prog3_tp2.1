@@ -40,7 +40,7 @@ class CurrencyConverter {
     }
     }
     //metodo adicional//
-     getExchangeRateDifference(fromCurrency, toCurrency) {
+     getExchangeRateDifference(fromCurrency, toCurrency); {
         const today = new Date().toISOString().split('T')[0];
         const yesterday = new Date(Date.now() - 84000000).toISOString().split('T')[0];
         try {
@@ -60,7 +60,7 @@ class CurrencyConverter {
             return null;
     }
     }
-}  
+  
 
 
 
