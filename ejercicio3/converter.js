@@ -6,12 +6,63 @@ class Currency {
 }
 
 class CurrencyConverter {
-    constructor() {}
+    constructor(apiUrl) {
+        this.apiUrl = apiUrl;
+        this.currencies = [];
+    }
 
-    getCurrencies(apiUrl) {}
+   async getCurrencies(apiUrl) {
+        try {
+            const response = await fetch(`${this.apiUrl}/currencies`);
+            const data = await response.json();
+            this.currencies = Object.entries(data).map(
+                ([code, name]) => new Currency(code, name)
+            );
+        } catch (error) {
+            console.error("Error al recuperar la moneda: ", error);
+        }
+    }
 
-    convertCurrency(amount, fromCurrency, toCurrency) {}
-}
+    async convertCurrency(amount, fromCurrency, toCurrency) {
+        if (fromCurrency.code === toCurrency.code) {
+            return amount;
+        }
+        try {
+            const response = await fetch(
+                `${this.apiUrl}/latest?amount=${amount}&from=${fromCurrency.code}&to=${toCurrency.code}`
+            );
+            const data = await response.json();
+            return data.rates[toCurrency.code];
+        } catch (error) {
+            console.error("Error al convertir la moneda: ", error);
+            return null;
+        }
+    }
+    }
+    //metodo adicional//
+     getExchangeRateDifference(fromCurrency, toCurrency) {
+        const today = new Date().toISOString().split('T')[0];
+        const yesterday = new Date(Date.now() - 84000000).toISOString().split('T')[0];
+        try {
+            const responseToday = await fetch(`${this.apiUrl}/${today}?from=${fromCurrency.code}&to=${toCurrency.code}`);
+            const dataToday = await responseToday.json();
+
+            const responseYesterday = await fetch(`${this.apiUrl}/${yesterday}?from=${fromCurrency.code}&to=${toCurrency.code}`);
+            const dataYesterday = await responseYesterday.json();
+
+            const rateToday = dataToday.rate[toCurrency.code];
+            const rateYesterday = dataYesterday.rate[toCurrency.code];
+
+            return rateToday - rateYesterday;
+
+        } catch (error) {
+            console.error(" Error al obtener la diferencia de cambio", error);
+            return null;
+    }
+    }
+}  
+
+
 
 document.addEventListener("DOMContentLoaded", async () => {
     const form = document.getElementById("conversion-form");
